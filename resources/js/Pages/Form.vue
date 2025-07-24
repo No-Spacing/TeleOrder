@@ -93,15 +93,28 @@ function submit(){
         net_amount: field.net_amount,
     }));
 
-    router.post('/submit',{
-        code: form.code,
-        customer: form.customer,
-        paymentTerms: form.paymentTerms,
-        deliveredBy: form.deliveredBy,
-        deliveredTo: form.deliveredTo,
-        specialInstruction: form.specialInstruction,
-        inputs: inputValues
+    // router.post('/submit',{
+    //     code: form.code,
+    //     customer: form.customer,
+    //     paymentTerms: form.paymentTerms,
+    //     deliveredBy: form.deliveredBy,
+    //     deliveredTo: form.deliveredTo,
+    //     specialInstruction: form.specialInstruction,
+    //     inputs: inputValues
+    // })
+
+    axios.post('/submit', form, {
+        responseType: 'blob',
     })
+    .then((response) => {
+        const fileURL = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+        window.open(fileURL); // Opens in a new tab
+        loading.value = false
+    })
+    .catch((error) => {
+        console.error('PDF generation failed:', error);
+        loading.value = false
+    });
 }
 
 </script>

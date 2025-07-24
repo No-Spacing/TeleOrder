@@ -40,26 +40,33 @@ class FormController extends Controller
 
     public function Submit(Request $request)
     {
-        $transaction = Transaction::create([
-            'transaction_code' => 1,
-            'code_id' => $request->code,
-            'deliveredBy' => $request->deliveredBy,
-            'deliveredTo' => $request->deliveredTo,
-            'paymentTerms' => $request->paymentTerms,
-            'specialInstruction' => $request->specialInstruction,
-        ]);
+        // $transaction = Transaction::create([
+        //     'transaction_code' => 1,
+        //     'code_id' => $request->code,
+        //     'deliveredBy' => $request->deliveredBy,
+        //     'deliveredTo' => $request->deliveredTo,
+        //     'paymentTerms' => $request->paymentTerms,
+        //     'specialInstruction' => $request->specialInstruction,
+        // ]);
 
-        $items = $request->input('inputs');
-        foreach($items as $item)
-        {
-            TransactionDetails::create([
-                'transaction_id' => $transaction->id,
-                'product_id' => $item['product_id'],
-                'quantity' => $item['quantity'],
-                'unit_price' => $item['price'],
-                'net_amount' => $item['net_amount'],
-            ]);
-        }
+        // $items = $request->input('inputs');
+        // foreach($items as $item)
+        // {
+        //     $transactionDetails = TransactionDetails::create([
+        //         'transaction_id' => $transaction->id,
+        //         'product_id' => $item['product_id'],
+        //         'quantity' => $item['quantity'],
+        //         'unit_price' => $item['price'],
+        //         'net_amount' => $item['net_amount'],
+        //     ]);
+        // }
+
+        // dd($transaction, $transactionDetails);
+
+        $pdf = Pdf::loadView('Pdf.receipt');
+
+        return $pdf->setPaper('a4', 'portrait')->download('invoice.pdf');
+
     }
 
     public function SubmitImportProduct(Request $request)

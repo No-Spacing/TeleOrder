@@ -12,6 +12,8 @@ Route::get('/receipt', function () {
     return view('Pdf.receipt');
 });
 
+Route::inertia('/login', 'Auth/Login');
+
 Route::controller(FormController::class)->group(function () {
     Route::get('/', 'Index');
 

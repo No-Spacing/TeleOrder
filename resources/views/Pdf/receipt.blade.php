@@ -124,16 +124,17 @@
 
 <table width="100%" cellspacing="0" cellpadding="5">
     <tr>
-        <td><strong>SOLD TO:</strong><br><br><br></td>
+        <td><strong>SOLD TO:</strong><br>asd</td>
         <td><strong>CUSTOMER CODE:</strong><br><br></td>
         <td><strong>P.O. NUMBER:</strong><br><br></td>
         <td><strong>ORDER DATE:</strong><br><br></td>
         <td><strong>DELIVERY DATE:</strong><br><br></td>
         <td><strong>PAYMENT TERMS:</strong><br>
-            ☐ CASH ☐ PDC ☐ CHARGE
+            {{-- ☐ CASH ☐ PDC ☐ CHARGE --}}
         </td>
         <td><strong>DELIVERED BY:</strong><br>
-            ☐ AIR ☐ SEA ☐ TRUCK ☐ OTHERS: _______
+            {{-- ☐ AIR ☐ SEA ☐ TRUCK ☐ OTHERS: _______ --}}
+
         </td>
     </tr>
     <tr>
@@ -163,7 +164,7 @@
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td colspan="7" class="center"><strong>TOTAL AMOUNT ►</strong></td>
+        <td colspan="7"><strong>TOTAL AMOUNT ►</strong></td>
     </tr>
 </table>
 
