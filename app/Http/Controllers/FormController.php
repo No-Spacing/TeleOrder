@@ -13,8 +13,11 @@ use App\Imports\CustomerImport;
 use App\Models\Code;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Transaction;
+use App\Models\TransactionDetails;
 
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class FormController extends Controller
 {
@@ -37,8 +40,26 @@ class FormController extends Controller
 
     public function Submit(Request $request)
     {
-        // $items = $request->input('inputs');
+        $transaction = Transaction::create([
+            'transaction_code' => 1,
+            'code_id' => $request->code,
+            'deliveredBy' => $request->deliveredBy,
+            'deliveredTo' => $request->deliveredTo,
+            'paymentTerms' => $request->paymentTerms,
+            'specialInstruction' => $request->specialInstruction,
+        ]);
 
+        $items = $request->input('inputs');
+        foreach($items as $item)
+        {
+            TransactionDetails::create([
+                'transaction_id' => $transaction->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['price'],
+                'net_amount' => $item['net_amount'],
+            ]);
+        }
     }
 
     public function SubmitImportProduct(Request $request)

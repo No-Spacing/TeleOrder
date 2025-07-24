@@ -29,7 +29,7 @@ const fields = ref([
     uom: '',
     quantity: null,
     price: null,
-    netPrice: null,
+    net_amount: null,
   }
 ]);
 
@@ -90,7 +90,7 @@ function submit(){
         product_id: field.value,
         quantity: field.quantity,
         price: field.price,
-        netPrice: field.netPrice,
+        net_amount: field.net_amount,
     }));
 
     router.post('/submit',{
@@ -109,61 +109,65 @@ function submit(){
     <Layout>
         <v-container fluid>
             <form @submit.prevent="submit">
-                <v-row no-gutters>
-                    <v-col cols="12">
-                        <v-autocomplete
-                            v-model:search="codeSearch"
-                            v-model="form.code"
-                            label="Code"
-                            :items="props.codes"
-                            item-title="code"
-                            item-value="id"
-                            @update:model-value="update"
-                            required
-                        ></v-autocomplete>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-select
-                            label="Payment Terms"
-                            v-model="form.paymentTerms"
-                            :items="['CASH', 'PDC', 'CHARGE']"
-                            required
-                        ></v-select>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-select
-                            label="Delivered By"
-                            v-model="form.deliveredBy"
-                            :items="['AIR', 'SEA', 'TRUCK']"
-                            required
-                        ></v-select>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-autocomplete
-                            label="Customer"
-                            v-model="form.customer"
-                            :items="props.codes[0]?.customers"
-                            item-title="customer"
-                            item-value="id"
-                            required
-                        ></v-autocomplete>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-text-field
-                            label="Delivered To"
-                            v-model="form.deliveredTo"
-                            required
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-textarea 
-                            label="Special Instruction"
-                            v-model="form.specialInstruction"
-                            required
-                        ></v-textarea>
-                    </v-col>
-                </v-row>
-                <v-card title="Product" variant="outlined">
+                <v-card title="Customer Details" variant="outlined" class="ma-2 pa-2">
+                    <v-card-text>
+                        <v-row no-gutters>
+                            <v-col cols="12">
+                                <v-autocomplete
+                                    v-model:search="codeSearch"
+                                    v-model="form.code"
+                                    label="Code"
+                                    :items="props.codes"
+                                    item-title="code"
+                                    item-value="id"
+                                    @update:model-value="update"
+                                    required
+                                ></v-autocomplete>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-autocomplete
+                                    label="Customer"
+                                    v-model="form.customer"
+                                    :items="props.codes[0]?.customers"
+                                    item-title="customer"
+                                    item-value="id"
+                                    required
+                                ></v-autocomplete>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-select
+                                    label="Payment Terms"
+                                    v-model="form.paymentTerms"
+                                    :items="['CASH', 'PDC', 'CHARGE']"
+                                    required
+                                ></v-select>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-select
+                                    label="Delivered By"
+                                    v-model="form.deliveredBy"
+                                    :items="['AIR', 'SEA', 'TRUCK']"
+                                    required
+                                ></v-select>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field
+                                    label="Delivered To"
+                                    v-model="form.deliveredTo"
+                                    required
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-textarea 
+                                    label="Special Instruction"
+                                    v-model="form.specialInstruction"
+                                    required
+                                ></v-textarea>
+                            </v-col>
+                        </v-row>
+                    </v-card-text>
+                </v-card>
+                <v-card title="Product Details" variant="outlined" class="ma-2 pa-2">
                     <v-card-text>
                         <v-row no-gutters v-for="(field, index) in fields" :key="index">
                             <v-col cols="12" md="2"> 
@@ -209,7 +213,7 @@ function submit(){
                              <v-col cols="12" md="2" class="mx-2"> 
                                 <v-text-field 
                                     placeholder="Net Amount"
-                                    v-model="field.netPrice"
+                                    v-model="field.net_amount"
                                     type="number"
                                     required
                                 ></v-text-field>
@@ -221,7 +225,6 @@ function submit(){
                         </v-row>
                     </v-card-text>
                 </v-card>
-
                 <v-btn
                     class="me-4"
                     type="submit"

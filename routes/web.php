@@ -8,6 +8,10 @@ use Inertia\Inertia;
 
 Route::inertia('/import', 'Import');
 
+Route::get('/receipt', function () {
+    return view('Pdf.receipt');
+});
+
 Route::controller(FormController::class)->group(function () {
     Route::get('/', 'Index');
 
