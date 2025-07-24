@@ -2,7 +2,7 @@
     body {
         font-family: Arial, sans-serif;
         font-size: 13px;
-        margin: 0 200px;
+        /* 👈 from 200px to something tighter */
     }
 
     table {
@@ -24,7 +24,7 @@
     .header {
         text-align: right;
         font-weight: bold;
-        font-size: 16px;
+        font-size: 12px;
         color: #d33;
     }
 
@@ -43,7 +43,7 @@
     }
 
     .reseller {
-        font-size: 18px;
+        font-size: 15px;
         color: #d33;
         font-weight: bold;
     }
@@ -59,17 +59,20 @@
     }
 
     .col-2 {
-        width: 16.66%;
+        width: 20%;
     }
+
+    /* was 16.66% */
 
     .col-3 {
         width: 25%;
     }
 
     .col-4 {
-        width: 33.33%;
+        width: 40%;
     }
 
+    /* was 33.33% */
     .col-6 {
         width: 50%;
     }
@@ -84,20 +87,23 @@
     }
 
     .nested-table {
-    width: 100%;
-    border: none;
-  }
-  .nested-table td {
-    border: none;
-    padding: 4px 8px;
-  }
+        width: 100%;
+        border: none;
+    }
+
+    .nested-table td {
+        border: none;
+        padding: 4px 8px;
+    }
+
+    
 </style>
 
 <!-- Top Info -->
 <table>
     <tr>
-        <td class="no-border col-2">
-            <img src="https://inmed.com.ph/assets/img/home.png" alt="INMED Logo" width="200"><br><br>
+        <td class="no-border col-3">
+            <img src="images/inmed_logo.png" alt=" " width="150"><br><br>
             <strong class="reseller">... we help the resellers</strong>
         </td>
         <td class="no-border col-4"><br>
@@ -106,18 +112,18 @@
             Tel. +63 2 85711888<br>
             www.inmed.com.ph
         </td>
-        <td class="no-border tuv col-4">
+        <td class="no-border tuv col-2">
             <img src="images/tuv.png" alt="tuv" width="70"><br>
             <span>ISO 9001</span><br>
             2015 SERIES<br>
             CERTIFIED
         </td>
-        <td class="header col-2 center" height="10">
+        <td class="header col-3 center">
             <strong>TELE ORDER</strong><br>
             <hr>
             <span class="red">T.O. No.: 159169</span>
         </td>
-    </tr><br>
+    </tr>
 </table>
 
 <!-- Sold To / Delivery Info -->
@@ -132,14 +138,28 @@
         <td><strong>PAYMENT TERMS:</strong><br>
             {{-- ☐ CASH ☐ PDC ☐ CHARGE --}}
         </td>
-        <td><strong>DELIVERED BY:</strong><br>
+        <td><strong>DELIVERED BY:</strong>
             {{-- ☐ AIR ☐ SEA ☐ TRUCK ☐ OTHERS: _______ --}}
 
         </td>
     </tr>
     <tr>
         <td colspan="4" class="half"><strong>DELIVER TO:</strong><br><br><br></td>
-        <td colspan="4" class="half"><strong>SPECIAL INSTRUCTION:</strong><br><br><br></td>
+        <td colspan="3" class="half"><strong>SPECIAL INSTRUCTION:</strong><br><br><br></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td colspan="2"><strong>SOLD TO:</strong><br>asd</td>
+        <td><strong>CUSTOMER CODE:</strong><br></td>
+        <td><strong>P.O. NUMBER:</strong><br></td>
+        <td><strong>ORDER DATE:</strong><br></td>
+        <td><strong>DELIVERY DATE:</strong><br></td>
+        <td><strong>PAYMENT TERMS:</strong><br></td>
+    </tr>
+    <tr>
+        <td colspan="4"><strong>DELIVERED BY:</strong><br></td>
+        <td colspan="3"><strong>SPECIAL INSTRUCTION:</strong><br></td>
     </tr>
 </table>
 
