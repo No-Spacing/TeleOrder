@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Product;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class TransactionDetails extends Model
 {
@@ -13,4 +16,9 @@ class TransactionDetails extends Model
         'unit_price',
         'net_amount',
     ];
+
+    public function product(): HasOne
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
 }

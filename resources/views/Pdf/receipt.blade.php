@@ -130,36 +130,23 @@
 
 <table width="100%" cellspacing="0" cellpadding="5">
     <tr>
-        <td><strong>SOLD TO:</strong><br>asd</td>
-        <td><strong>CUSTOMER CODE:</strong><br><br></td>
+        <td><strong>SOLD TO:</strong><br>{{ $customer->customer->customer }}</td>
+        <td><strong>CUSTOMER CODE:</strong><br>{{ $customer->code }}</td>
         <td><strong>P.O. NUMBER:</strong><br><br></td>
         <td><strong>ORDER DATE:</strong><br><br></td>
         <td><strong>DELIVERY DATE:</strong><br><br></td>
         <td><strong>PAYMENT TERMS:</strong><br>
             {{-- ☐ CASH ☐ PDC ☐ CHARGE --}}
+            {{ $transaction->paymentTerms }}
         </td>
         <td><strong>DELIVERED BY:</strong>
             {{-- ☐ AIR ☐ SEA ☐ TRUCK ☐ OTHERS: _______ --}}
-
+            {{ $transaction->deliveredBy }}
         </td>
     </tr>
     <tr>
-        <td colspan="4" class="half"><strong>DELIVER TO:</strong><br><br><br></td>
-        <td colspan="3" class="half"><strong>SPECIAL INSTRUCTION:</strong><br><br><br></td>
-    </tr>
-</table>
-<table>
-    <tr>
-        <td colspan="2"><strong>SOLD TO:</strong><br>asd</td>
-        <td><strong>CUSTOMER CODE:</strong><br></td>
-        <td><strong>P.O. NUMBER:</strong><br></td>
-        <td><strong>ORDER DATE:</strong><br></td>
-        <td><strong>DELIVERY DATE:</strong><br></td>
-        <td><strong>PAYMENT TERMS:</strong><br></td>
-    </tr>
-    <tr>
-        <td colspan="4"><strong>DELIVERED BY:</strong><br></td>
-        <td colspan="3"><strong>SPECIAL INSTRUCTION:</strong><br></td>
+        <td colspan="4" class="half"><strong>DELIVER TO:</strong><br>{{ $transaction->deliveredTo }}</td>
+        <td colspan="3" class="half"><strong>SPECIAL INSTRUCTION:</strong><br>{{ $transaction->specialInstruction }}</td>
     </tr>
 </table>
 
@@ -175,14 +162,16 @@
         <th>NET AMOUNT</th>
     </tr>
     <!-- Sample rows, you can duplicate as needed -->
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
+        @foreach ($transaction->transaction_details as $item)
+            <tr>
+                <td>{{ $item->product->code }}</td>
+                <td>{{ $item->quantity }}</td>
+                <td>{{ $item->product->uom }}</td>
+                <td colspan="2">{{ $item->product->description }}</td>
+                <td>{{ $item->unit_price }}</td>
+                <td>{{ $item->net_amount }}</td>
+            </tr>  
+        @endforeach
     <tr>
         <td colspan="7"><strong>TOTAL AMOUNT ►</strong></td>
     </tr>

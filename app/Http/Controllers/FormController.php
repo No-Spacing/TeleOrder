@@ -40,30 +40,35 @@ class FormController extends Controller
 
     public function Submit(Request $request)
     {
-        // $transaction = Transaction::create([
-        //     'transaction_code' => 1,
-        //     'code_id' => $request->code,
-        //     'deliveredBy' => $request->deliveredBy,
-        //     'deliveredTo' => $request->deliveredTo,
-        //     'paymentTerms' => $request->paymentTerms,
-        //     'specialInstruction' => $request->specialInstruction,
-        // ]);
 
-        // $items = $request->input('inputs');
-        // foreach($items as $item)
-        // {
-        //     $transactionDetails = TransactionDetails::create([
-        //         'transaction_id' => $transaction->id,
-        //         'product_id' => $item['product_id'],
-        //         'quantity' => $item['quantity'],
-        //         'unit_price' => $item['price'],
-        //         'net_amount' => $item['net_amount'],
-        //     ]);
-        // }
+        $transaction = Transaction::create([
+            'transaction_code' => 1,
+            'code_id' => $request->code,
+            'deliveredBy' => $request->deliveredBy,
+            'deliveredTo' => $request->deliveredTo,
+            'paymentTerms' => $request->paymentTerms,
+            'specialInstruction' => $request->specialInstruction,
+        ]);
 
-        // dd($transaction, $transactionDetails);
+        $items = $request->input('inputs');
+        foreach($items as $item)
+        {
+            $transactionDetails = TransactionDetails::create([
+                'transaction_id' => $transaction->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['price'],
+                'net_amount' => $item['net_amount'],
+            ]);
+        }
 
-        $pdf = Pdf::loadView('Pdf.receipt');
+        $customerDetails = Code::with('customer')->where('id', $request->code)->first();
+        $transactionDetails = Transaction::with('transaction_details.product')->where('id', $transaction->id)->first();
+
+        $pdf = Pdf::loadView('Pdf.receipt', [
+            'customer' => $customerDetails,
+            'transaction' => $transactionDetails,
+        ]);
 
         return $pdf->setPaper('a4', 'portrait')->download('invoice.pdf');
 

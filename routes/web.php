@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\UserController;
 
 use Inertia\Inertia;
 
@@ -12,19 +13,27 @@ Route::get('/receipt', function () {
     return view('Pdf.receipt');
 });
 
-Route::inertia('/login', 'Auth/Login');
+Route::middleware(['user-auth'])->group(function () {
+    Route::inertia('/', 'Auth/Login');
 
-Route::controller(FormController::class)->group(function () {
-    Route::get('/', 'Index');
+    Route::controller(UserController::class)->group(function () {
+        Route::post('/login', 'Login');
+    });
 
-    Route::post('/submit', 'Submit');
+    Route::controller(FormController::class)->group(function () {
+        Route::get('/form', 'Index');
 
-    Route::post('/submit-import-product', 'SubmitImportProduct');
+        Route::post('/submit', 'Submit');
 
-    Route::post('/submit-import-code', 'SubmitImportCode');
+        Route::post('/submit-import-product', 'SubmitImportProduct');
 
-    Route::post('/submit-import-customer', 'SubmitImportCustomer');
+        Route::post('/submit-import-code', 'SubmitImportCode');
+
+        Route::post('/submit-import-customer', 'SubmitImportCustomer');
+    });
 });
+
+
 
 
 
