@@ -16,10 +16,6 @@ Route::get('/receipt', function () {
 Route::middleware(['user-auth'])->group(function () {
     Route::inertia('/', 'Auth/Login');
 
-    Route::controller(UserController::class)->group(function () {
-        Route::post('/login', 'Login');
-    });
-
     Route::controller(FormController::class)->group(function () {
         Route::get('/form', 'Index');
 
@@ -33,6 +29,10 @@ Route::middleware(['user-auth'])->group(function () {
     });
 });
 
+
+Route::post('/login', [UserController::class, 'Login']);
+
+Route::get('/logout', [UserController::class, 'Logout']);
 
 
 

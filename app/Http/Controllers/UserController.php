@@ -14,10 +14,21 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect('/form');
         } else {
             return back()->with(['message' => 'Invalid Credentials',]);
         }
+    }
+
+    public function Logout(Request $request)
+    {
+         Auth::logout();
+ 
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
     }
 }

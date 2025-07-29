@@ -2,10 +2,11 @@
 import Layout from '../Layout/Main.vue'
 import { watch, ref, computed } from 'vue'
 import { router, useForm } from '@inertiajs/vue3'
-import { nullifyTransforms } from 'vuetify/lib/util/animation.mjs';
+import { VDateInput } from 'vuetify/labs/VDateInput'
  
 const codeSearch = ref(null);
 const loading = ref(false);
+const others = ref(true);
 
 const props = defineProps({ 
     codes: Object,
@@ -16,7 +17,11 @@ const form = useForm({
     code: null,
     customer: null,
     paymentTerms: null,
+    po_no: null,
+    delivery_date: null,
+    order_date: null,
     deliveredBy: null,
+    otherDelivery: null,
     deliveredTo: null,
     specialInstruction: null,
 })
@@ -37,7 +42,7 @@ const fields = ref([
 // watch works directly on a ref
 watch(codeSearch, (value) => {
     loading.value = true
-    router.get('/', {
+    router.get('/form', {
         search: value,
     },
     {
@@ -69,7 +74,7 @@ watch(
                 () => field.search,
                 (searchTerm) => {
                     loading.value = true
-                    router.get('/', { search: searchTerm }, {
+                    router.get('/form', { search: searchTerm }, {
                         preserveState: true,
                         preserveScroll: true,
                         only: ['products'],
@@ -104,9 +109,17 @@ const onProductSelect = (field) => {
     field.uom = selected?.uom || '';
 };
 
+function otherField() {
+    if(form.deliveredBy == 'OTHERS')
+    {
+        others.value = false;
+    } else {
+        others.value = true;
+    }
+}
 
 function submit(){
-    loading.value = true;
+    // loading.value = true;
     const inputValues = fields.value.map(field => ({
         product_id: field.value,
         quantity: field.quantity,
@@ -120,6 +133,10 @@ function submit(){
     //     paymentTerms: form.paymentTerms,
     //     deliveredBy: form.deliveredBy,
     //     deliveredTo: form.deliveredTo,
+    //     otherDelivery: form.otherDelivery,
+    //     po_no: form.po_no,
+    //     delivery_date: form.delivery_date,
+    //     order_date: form.order_date,
     //     specialInstruction: form.specialInstruction,
     //     inputs: inputValues
     // })
@@ -130,6 +147,10 @@ function submit(){
         paymentTerms: form.paymentTerms,
         deliveredBy: form.deliveredBy,
         deliveredTo: form.deliveredTo,
+        otherDelivery: form.otherDelivery,
+        po_no: form.po_no,
+        delivery_date: form.delivery_date,
+        order_date: form.order_date,
         specialInstruction: form.specialInstruction,
         inputs: inputValues
     }, {
@@ -156,9 +177,9 @@ function submit(){
                         <v-row no-gutters>
                             <v-col md="6" cols="12">
                                 <v-autocomplete
+                                    v-model="form.code"
                                     v-model:search="codeSearch"
                                     class="mx-2"
-                                    v-model="form.code"
                                     label="Code"
                                     :items="props.codes"
                                     item-title="code"
@@ -179,6 +200,14 @@ function submit(){
                                 ></v-autocomplete>
                             </v-col>
                             <v-col md="4" cols="12">
+                                <v-text-field
+                                    class="mx-2"
+                                    label="Delivered To"
+                                    v-model="form.deliveredTo"
+                                    
+                                ></v-text-field>
+                            </v-col>
+                            <v-col md="4" cols="12">
                                 <v-select
                                     label="Payment Terms"
                                     class="mx-2"
@@ -187,22 +216,45 @@ function submit(){
                                     
                                 ></v-select>
                             </v-col>
-                            <v-col md="4" cols="12">
+                            <v-col md="1" cols="12">
                                 <v-select
                                     label="Delivered By"
                                     class="mx-2"
                                     v-model="form.deliveredBy"
-                                    :items="['AIR', 'SEA', 'TRUCK']"
-                                    
+                                    :items="['AIR', 'SEA', 'TRUCK', 'OTHERS']"
+                                    @update:model-value="otherField"
                                 ></v-select>
+                            </v-col>
+                            <v-col md="3" cols="12">
+                                <v-text-field
+                                    v-model="form.otherDelivery"
+                                    :disabled="others"
+                                    label="Others"
+                                    class="mx-2"
+                                ></v-text-field>
                             </v-col>
                             <v-col md="4" cols="12">
                                 <v-text-field
                                     class="mx-2"
-                                    label="Delivered To"
-                                    v-model="form.deliveredTo"
-                                    
+                                    label="PO No."
+                                    v-model="form.po_no"
+                            
                                 ></v-text-field>
+                            </v-col>
+                            <v-col md="4" cols="12">
+                                <v-date-input 
+                                    class="mx-2"
+                                    label="Order Date"
+                                    v-model="form.order_date"
+                                ></v-date-input>
+                            </v-col>
+                            <v-col md="4" cols="12">
+                                <v-date-input 
+                                    class="mx-2"
+                                    label="Delivery Date"
+                                    v-model="form.delivery_date"
+                                ></v-date-input>
+          
                             </v-col>
                             <v-col cols="12">
                                 <v-textarea 
@@ -227,7 +279,7 @@ function submit(){
                                     item-title="code"
                                     item-value="id"
                                     @update:modelValue="onProductSelect(field)"
-                                    
+                                    no-data-text
                                 ></v-autocomplete>
                             </v-col>   
                             <v-col cols="12" md="3" class="mx-2"> 

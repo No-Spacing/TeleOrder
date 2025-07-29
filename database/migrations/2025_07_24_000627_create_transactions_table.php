@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_code');
+            $table->string('teleorder_date');
+            $table->string('teleorder_no');
             $table->foreignId('code_id')->references('id')->on('codes');
+            $table->longText('po_no');
+            $table->date('delivery_date');
+            $table->date('order_date');
             $table->string('paymentTerms');
             $table->string('deliveredBy');
             $table->longText('deliveredTo');

@@ -11,10 +11,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Transaction extends Model
 {
     protected $fillable = [
-        'transaction_code',
+        'teleorder_date',
+        'teleorder_no',
         'code_id',
+        'po_no',
+        'delivery_date',
+        'order_date',
         'paymentTerms',
-        'deliveredBy',
         'deliveredBy',
         'deliveredTo',
         'specialInstruction',

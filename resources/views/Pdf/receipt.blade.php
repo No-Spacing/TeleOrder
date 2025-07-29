@@ -121,7 +121,7 @@
         <td class="header col-3 center">
             <strong>TELE ORDER</strong><br>
             <hr>
-            <span class="red">T.O. No.: 159169</span>
+            <span class="red">T.O. No.: {{ $transaction->teleorder_date . $transaction->teleorder_no }}</span>
         </td>
     </tr>
 </table>
@@ -132,9 +132,9 @@
     <tr>
         <td><strong>SOLD TO:</strong><br>{{ $customer->customer->customer }}</td>
         <td><strong>CUSTOMER CODE:</strong><br>{{ $customer->code }}</td>
-        <td><strong>P.O. NUMBER:</strong><br><br></td>
-        <td><strong>ORDER DATE:</strong><br><br></td>
-        <td><strong>DELIVERY DATE:</strong><br><br></td>
+        <td><strong>P.O. NUMBER:</strong><br>{{ $transaction->po_no }}</td>
+        <td><strong>ORDER DATE:</strong><br>{{ $transaction->order_date }}</td>
+        <td><strong>DELIVERY DATE:</strong><br>{{ $transaction->delivery_date }}<br></td>
         <td><strong>PAYMENT TERMS:</strong><br>
             {{-- ☐ CASH ☐ PDC ☐ CHARGE --}}
             {{ $transaction->paymentTerms }}
@@ -173,7 +173,7 @@
             </tr>  
         @endforeach
     <tr>
-        <td colspan="7"><strong>TOTAL AMOUNT ►</strong></td>
+        <td colspan="7"><strong>TOTAL AMOUNT: </strong> {{ $totalNetAmount }}</td>
     </tr>
 </table>
 
@@ -185,8 +185,9 @@
     </tr>
     <tr>
         <td><strong>PRICING VERIFIED BY:</strong><br><br></td>
-        <td><strong>ENCODER:</strong><br><br></td>
-        <td><strong>DATE:</strong><br><br>TIME:</td>
+        <td><strong>ENCODER:</strong><br>{{ $user }}</td>
+        <td><strong>DATE:</strong><br>{{ date("Y-m-d") }}
+        <strong>TIME:</strong><br>{{ date("h:ia") }}</td>
         <td>☐ TELEPHONE<br>☐ FAX<br>☐ E-MAIL</td>
         <td><strong>ORDERED BY:</strong><br><br></td>
         <td><strong>POSITION:</strong><br><br></td>

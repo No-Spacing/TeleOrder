@@ -9,6 +9,8 @@ use App\Models\Product;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,17 +20,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Code::create(['code' => 123]);
-
-        Customer::create([
-            'code_id' => 1,
-            'customer' => 'Test',
+        User::create([
+            'name' => 'Encoder',
+            'email' => 'encoder@email.com',
+            'password' => Hash::make('password'),
         ]);
 
-        Product::create([
-            'code' => 'Test123',
-            'description' => 'Test Description',
-            'uom' => 'Each',
-        ]);
+        // Code::create(['code' => 123]);
+
+        // Customer::create([
+        //     'code_id' => 1,
+        //     'customer' => 'Test',
+        // ]);
+
+        // Product::create([
+        //     'code' => 'Test123',
+        //     'description' => 'Test Description',
+        //     'uom' => 'Each',
+        // ]);
     }
 }
