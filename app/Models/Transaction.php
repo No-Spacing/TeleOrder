@@ -7,6 +7,8 @@ use App\Models\Code;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 class Transaction extends Model
 {
@@ -24,6 +26,11 @@ class Transaction extends Model
         'user_id',
         'status'
     ];
+
+    public function code(): HasOne
+    {
+        return $this->hasOne(Code::class, 'id', 'code_id');
+    }
 
     public function transaction_details(): HasMany
     {

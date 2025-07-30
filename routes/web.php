@@ -19,6 +19,12 @@ Route::middleware(['user-auth'])->group(function () {
 
     Route::controller(RecordController::class)->group(function () {
         Route::get('/records', 'Index');
+
+        Route::post('/view-to', 'ViewTO');
+
+        Route::post('/submit-approve', 'SubmitApprove');
+
+        Route::post('/submit-decline', 'SubmitDecline');
     });
 
     Route::controller(FormController::class)->group(function () {
