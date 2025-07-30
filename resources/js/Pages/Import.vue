@@ -29,9 +29,9 @@ function submit(value){
         <v-container>
             <form @submit.prevent>
                 <v-file-input v-model="form.file" label="File input"></v-file-input>
-                <v-btn type="submit" @click="submit('product')">Product</v-btn>
                 <v-btn type="submit" @click="submit('code')">Code</v-btn>
                 <v-btn type="submit" @click="submit('customer')">Customer</v-btn>
+                <v-btn type="submit" @click="submit('product')">Product</v-btn>
             </form>
         </v-container>
     </Layout>

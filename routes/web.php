@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecordController;
 
 use Inertia\Inertia;
 
@@ -15,6 +16,10 @@ Route::get('/receipt', function () {
 
 Route::middleware(['user-auth'])->group(function () {
     Route::inertia('/', 'Auth/Login');
+
+    Route::controller(RecordController::class)->group(function () {
+        Route::get('/records', 'Index');
+    });
 
     Route::controller(FormController::class)->group(function () {
         Route::get('/form', 'Index');

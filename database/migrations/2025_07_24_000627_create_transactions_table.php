@@ -24,6 +24,7 @@ return new class extends Migration
             $table->longText('deliveredTo');
             $table->longText('specialInstruction');
             $table->foreignId('user_id')->nullable()->references('id')->on('users');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -185,7 +185,8 @@ function submit(){
                                     item-title="code"
                                     item-value="id"
                                     @update:model-value="update"
-                                    
+                                    variant="outlined"
+
                                 ></v-autocomplete>
                             </v-col>
                             <v-col md="6" cols="12">
@@ -196,7 +197,8 @@ function submit(){
                                     :items="props.codes[0]?.customers"
                                     item-title="customer"
                                     item-value="id"
-                                    
+                                    variant="outlined"
+
                                 ></v-autocomplete>
                             </v-col>
                             <v-col md="4" cols="12">
@@ -204,33 +206,37 @@ function submit(){
                                     class="mx-2"
                                     label="Delivered To"
                                     v-model="form.deliveredTo"
+                                    variant="outlined"
                                     
                                 ></v-text-field>
                             </v-col>
-                            <v-col md="4" cols="12">
+                            <v-col md="2" cols="12">
                                 <v-select
                                     label="Payment Terms"
                                     class="mx-2"
                                     v-model="form.paymentTerms"
                                     :items="['CASH', 'PDC', 'CHARGE']"
+                                    variant="outlined"
                                     
                                 ></v-select>
                             </v-col>
-                            <v-col md="1" cols="12">
+                            <v-col md="2" cols="12">
                                 <v-select
                                     label="Delivered By"
                                     class="mx-2"
                                     v-model="form.deliveredBy"
                                     :items="['AIR', 'SEA', 'TRUCK', 'OTHERS']"
                                     @update:model-value="otherField"
+                                    variant="outlined"
                                 ></v-select>
                             </v-col>
-                            <v-col md="3" cols="12">
+                            <v-col md="4" cols="12">
                                 <v-text-field
                                     v-model="form.otherDelivery"
                                     :disabled="others"
                                     label="Others"
                                     class="mx-2"
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col md="4" cols="12">
@@ -238,6 +244,7 @@ function submit(){
                                     class="mx-2"
                                     label="PO No."
                                     v-model="form.po_no"
+                                    variant="outlined"
                             
                                 ></v-text-field>
                             </v-col>
@@ -246,6 +253,7 @@ function submit(){
                                     class="mx-2"
                                     label="Order Date"
                                     v-model="form.order_date"
+                                    variant="outlined"
                                 ></v-date-input>
                             </v-col>
                             <v-col md="4" cols="12">
@@ -253,6 +261,7 @@ function submit(){
                                     class="mx-2"
                                     label="Delivery Date"
                                     v-model="form.delivery_date"
+                                    variant="outlined"
                                 ></v-date-input>
           
                             </v-col>
@@ -262,6 +271,7 @@ function submit(){
                                     label="Special Instruction"
                                     v-model="form.specialInstruction"
                                     rows="3"
+                                    variant="outlined"
                                 ></v-textarea>
                             </v-col>
                         </v-row>
@@ -280,18 +290,21 @@ function submit(){
                                     item-value="id"
                                     @update:modelValue="onProductSelect(field)"
                                     no-data-text
+                                    variant="outlined"
                                 ></v-autocomplete>
                             </v-col>   
                             <v-col cols="12" md="3" class="mx-2"> 
                                 <v-text-field 
                                     v-model="field.description" 
                                     placeholder="Description"
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="1" class="mx-2"> 
                                 <v-text-field 
                                     v-model="field.uom" 
                                     placeholder="UOM"
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="1" class="mx-2"> 
@@ -299,6 +312,7 @@ function submit(){
                                     placeholder="Quantity"
                                     v-model="field.quantity"
                                     type="number"
+                                    variant="outlined"
                                     
                                 ></v-text-field>
                             </v-col>
@@ -307,15 +321,16 @@ function submit(){
                                     placeholder="Unit Price PHP - Philippine Peso"
                                     v-model="field.price"
                                     type="number"
-                                    
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
-                             <v-col cols="12" md="2" class="mx-2"> 
+                             <v-col cols="12" md="2" class="mx-3"> 
                                 <v-text-field 
                                     placeholder="Net Amount"
                                     v-model="field.net_amount"
                                     type="number"
                                     readonly
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="3" class="mx-2 mb-6">
@@ -329,8 +344,9 @@ function submit(){
                     <v-btn
                         type="submit"
                         size="large"
-                        :width="600"
+                        :width="500"
                         :loading="loading"
+                        variant="outlined"
                     >
                         submit
                     </v-btn>

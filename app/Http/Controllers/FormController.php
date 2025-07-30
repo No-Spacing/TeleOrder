@@ -60,6 +60,7 @@ class FormController extends Controller
             'deliveredTo' => $request->deliveredTo,
             'paymentTerms' => $request->paymentTerms,
             'specialInstruction' => $request->specialInstruction,
+            'status' => 'Pending'
         ]);
 
 

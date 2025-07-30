@@ -22,6 +22,7 @@ class Transaction extends Model
         'deliveredTo',
         'specialInstruction',
         'user_id',
+        'status'
     ];
 
     public function transaction_details(): HasMany
