@@ -185,22 +185,23 @@
     </tr>
     <tr>
         <td><strong>PRICING VERIFIED BY:</strong><br><br></td>
-        <td><strong>ENCODER:</strong><br>{{ $user }}</td>
-        <td><strong>DATE:</strong><br>{{ date("Y-m-d") }}
-        <strong>TIME:</strong><br>{{ date("h:ia") }}</td>
-        <td>☐ TELEPHONE<br>☐ FAX<br>☐ E-MAIL</td>
+        <td><strong>ENCODER:</strong><br></td>
+        <td><strong>DATE:</strong><br><br>
+        <strong>TIME:</strong><br><br></td>
+        <td> TELEPHONE<br> FAX<br> E-MAIL</td>
         <td><strong>ORDERED BY:</strong><br><br></td>
         <td><strong>POSITION:</strong><br><br></td>
         <td><strong>SIGNATURE:</strong><br><br></td>
     </tr>
     <tr>
-        <td><strong>APPROVAL:</strong><br><br></td>
+        <td><strong>APPROVAL:</strong><br>{{ $transaction->approver->name ?? '' }}</td>
         <td><strong>ORDER NO.:</strong><br><br></td>
         <td><strong>INVOICE NO.:</strong><br><br></td>
         <td colspan="4"><strong>REASONS FOR REJECTION:</strong><br>
-            ☐ OVER CREDIT LIMIT ☐ HOLD ACCOUNT ☐ CANCELLED<br>
-            CREDIT LIMIT: ________ C.L. BALANCE: ________<br>
-            ORDER TAKEN BY: ___________
+            {{ $transaction->rejected->type ?? '' }}<br>
+            <strong>CREDIT LIMIT:</strong> {{ $transaction->rejected->credit_limit ?? '' }}<br>
+            <strong>C.L. BALANCE:</strong> {{ $transaction->rejected->cl_balance ?? '' }}<br>
+            <strong>ORDER TAKEN BY:</strong> {{ $transaction->rejected->order_taken_by ?? '' }}
         </td>
     </tr>
 </table>
