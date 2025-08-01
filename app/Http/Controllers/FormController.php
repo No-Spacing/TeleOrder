@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FormController extends Controller
 {
-    public function Index(Request $request)
+    public function Form(Request $request)
     {
         $codes = Code::with('customers')
         ->where('code', 'LIKE', '%' . $request->search . '%')
@@ -34,7 +34,7 @@ class FormController extends Controller
         ->limit(5)
         ->get();
 
-        return inertia('Form')->with([
+        return inertia('Sales/Form')->with([
             'codes' => $codes,
             'products' => $products
         ]);
@@ -63,7 +63,6 @@ class FormController extends Controller
             'status' => 'Pending'
         ]);
 
-
         $items = $request->input('inputs');
         foreach($items as $item)
         {
@@ -81,14 +80,15 @@ class FormController extends Controller
 
         $totalNetAmount = $transactionDetails->transaction_details->sum('net_amount');
 
-        $pdf = Pdf::loadView('Pdf.receipt', [
-            'customer' => $customerDetails,
-            'transaction' => $transactionDetails,
-            'totalNetAmount' => $totalNetAmount,
-            'user' => Auth::user()->name,
-        ]);
+        return redirect('/form')->with(['message' => 'Success']);
 
-        return $pdf->setPaper('a4', 'portrait')->download('invoice.pdf');
+        // $pdf = Pdf::loadView('Pdf.receipt', [
+        //     'customer' => $customerDetails,
+        //     'transaction' => $transactionDetails,
+        //     'totalNetAmount' => $totalNetAmount,
+        // ]);
+
+        // return $pdf->setPaper('a4', 'portrait')->download('invoice.pdf');
 
     }
 
