@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('deliveredBy');
             $table->longText('deliveredTo');
             $table->longText('specialInstruction');
-            $table->foreignId('user_id')->nullable()->references('id')->on('users');
+            $table->foreignId('encoder_id')->nullable()->references('id')->on('users');
+            $table->foreignId('approver_id')->nullable()->references('id')->on('users');
             $table->string('status');
             $table->timestamps();
         });
