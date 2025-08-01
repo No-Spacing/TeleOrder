@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\TransactionDetails;
 use App\Models\Code;
+use App\Models\User;
+use App\Models\Rejected;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,7 +25,8 @@ class Transaction extends Model
         'deliveredBy',
         'deliveredTo',
         'specialInstruction',
-        'user_id',
+        'encoder_id',
+        'approver_id',
         'status'
     ];
 
@@ -35,5 +38,20 @@ class Transaction extends Model
     public function transaction_details(): HasMany
     {
         return $this->hasMany(TransactionDetails::class, 'transaction_id', 'id');
+    }
+
+    public function encoder(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'encoder_id'); 
+    }
+
+    public function approver(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'approver_id'); 
+    }
+
+    public function rejected(): HasOne
+    {
+        return $this->hasOne(Rejected::class, 'transaction_id', 'id');
     }
 }
