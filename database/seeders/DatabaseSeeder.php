@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Code;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Role;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,10 +21,37 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        Role::create(['role' => 'approver']);
+        Role::create(['role' => 'encoder']);
+        Role::create(['role' => 'sales']);
+        Role::create(['role' => 'admin']);
+
+        User::create([
+            'name' => 'Approver',
+            'email' => 'approver@inmed.com.ph',
+            'password' => Hash::make('password'),
+            'role_id' => 1
+        ]);
+
         User::create([
             'name' => 'Encoder',
-            'email' => 'encoder@email.com',
+            'email' => 'encoder@inmed.com.ph',
             'password' => Hash::make('password'),
+            'role_id' => 2
+        ]);
+
+        User::create([
+            'name' => 'Sales',
+            'email' => 'sales@inmed.com.ph',
+            'password' => Hash::make('password'),
+            'role_id' => 3
+        ]);
+
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@inmed.com.ph',
+            'password' => Hash::make('password'),
+            'role_id' => 4
         ]);
 
         // Code::create(['code' => 123]);
