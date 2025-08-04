@@ -359,6 +359,7 @@ function submit(){
                         :width="500"
                         :loading="loading"
                         variant="outlined"
+                        class="bg-green"
                     >
                         submit
                     </v-btn>
