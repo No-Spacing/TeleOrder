@@ -61,16 +61,20 @@ function viewTO(id, code_id){
     });
 }
 
-function approve(value){
+function approve(id, code_id){
     loading.value = true
     router.post('/submit-approve',{
-        id: value
+        id: id,
+        code_id: code_id,
     },
     {
         onSuccess: () => {
             loading.value = false;
             snackbar.value = true;
-        }
+        },
+        onError: () => {
+            loading.value = false;
+        },
     })
 }
 
@@ -84,6 +88,8 @@ function submitDecline(){
     {
         onSuccess: () => {
             loading.value = false
+            snackbar.value = true
+            declineDialog.value = false
         }
     })
 }
@@ -142,7 +148,7 @@ function paginations(){
                                     <v-btn class="mx-2" color="blue" @click="viewTO(record.id, record.code_id)" :loading="loading">
                                         View
                                     </v-btn>
-                                    <v-btn class="mx-2" color="green" @click="approve(record.id)" :loading="loading" v-if="record.status == 'Pending'">
+                                    <v-btn class="mx-2" color="green" @click="approve(record.id, record.code_id)" :loading="loading" v-if="record.status == 'Pending'">
                                         Approve
                                     </v-btn>
                                     <v-btn class="mx-2" color="red" @click="openDeclineDialog(record.id)" :loading="loading" v-if="record.status == 'Pending'"> 
@@ -200,11 +206,13 @@ function paginations(){
                         <v-btn
                             text="Cancel"
                             variant="outlined"
+                            class="bg-red"
                             @click="declineDialog = false"
                         ></v-btn>
                         <v-btn
                             text="Submit"
                             variant="outlined"
+                            class="bg-primary"
                             type="submit"
                         ></v-btn>
                     </v-card-actions>
