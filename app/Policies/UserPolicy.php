@@ -10,21 +10,21 @@ class UserPolicy
 {
     public function approver(User $user): bool
     {
-        return $user->role_id == Role::IS_APPROVER;
+        return $user->role_id == Role::IS_APPROVER || $user->role_id == Role::IS_ADMIN;
     }
 
     public function encoder(User $user): bool
     {
-        return $user->role_id == Role::IS_ENCODER ;
+        return $user->role_id == Role::IS_ENCODER || $user->role_id == Role::IS_ADMIN;
     }
 
     public function sales(User $user): bool
     {
-        return $user->role_id == Role::IS_SALES;
+        return $user->role_id == Role::IS_SALES || $user->role_id == Role::IS_ADMIN; 
     }
 
     public function admin(User $user): bool
     {
-        return $user->role_id == Role::IS_ADMIN;
+        return $user->role_id == Role::IS_ADMIN || $user->role_id == Role::IS_ADMIN;
     }
 }
