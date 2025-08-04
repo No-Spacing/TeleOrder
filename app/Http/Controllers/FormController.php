@@ -27,7 +27,7 @@ class FormController extends Controller
     {
         $codes = Code::with('customers')
         ->where('code', 'LIKE', '%' . $request->search . '%')
-        ->limit(5)
+        ->limit(10)
         ->get();
 
         $products = Product::where('code', 'LIKE', '%' . $request->search . '%')
