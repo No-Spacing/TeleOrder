@@ -11,28 +11,28 @@ const form = useForm({
 
 function submit(){
     form.post('/login', {
-        onError: () => form.reset(),
+        onError: () => form.reset(['password']),
     })
 }
 </script>
 
 <template>
     <Head title="Login" />
-    <v-container fluid class="d-flex justify-center align-center fill-height">
+    <v-container fluid class="d-flex justify-center align-center fill-height login-background">
         <v-card class="pa-10" :elevation="8" max-width="450" width="100%" rounded="2xl">
 
         <!-- Logo added here -->
-        <!-- <div class="mb-4">
+        <div class="mb-4">
             <v-img
-                src="images/inmed-logo.png"
+                src="/images/inmed_logo.png"
                 alt="Logo"
                 max-width="150"
-                contain
                 class="mx-auto"
+                contain
             />
-        </div> -->
+        </div>
 
-        <v-card-subtitle class="text-h6 text-medium-emphasis text-center mb-2">Tele-Order</v-card-subtitle>
+        <v-card-subtitle class="text-h6 text-medium-emphasis text-center mb-2">TeleOrder</v-card-subtitle>
 
         <v-alert
           v-if="$page.props.flash.message"
@@ -85,6 +85,11 @@ function submit(){
 <style>
 .fill-height {
     min-height: 100vh;
+}
+
+.login-background {
+    background: url('/public/images/inmed.jpg') no-repeat center center;
+    background-size: cover;
 }
 
 /* Card custom width (optional, already using max-width) */
