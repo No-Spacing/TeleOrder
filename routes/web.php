@@ -12,10 +12,6 @@ use Inertia\Inertia;
 
 Route::inertia('/import', 'Import');
 
-Route::get('/receipt', function () {
-    return view('Pdf.receipt');
-});
-
 Route::middleware(['user-auth'])->group(function () {
     Route::inertia('/', 'Auth/Login');
 
