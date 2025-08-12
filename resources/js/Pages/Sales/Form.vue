@@ -198,7 +198,7 @@ function submit(){
                                     item-value="id"
                                     @update:model-value="update"
                                     variant="outlined"
-
+                                    required
                                 ></v-autocomplete>
                             </v-col>
                             <v-col md="6" cols="12">
@@ -210,7 +210,7 @@ function submit(){
                                     item-title="customer"
                                     item-value="id"
                                     variant="outlined"
-
+                                    required
                                 ></v-autocomplete>
                             </v-col>
                             <v-col md="4" cols="12">
@@ -219,7 +219,7 @@ function submit(){
                                     label="Delivered To"
                                     v-model="form.deliveredTo"
                                     variant="outlined"
-                                    
+                                    required
                                 ></v-text-field>
                             </v-col>
                             <v-col md="2" cols="12">
@@ -229,7 +229,7 @@ function submit(){
                                     v-model="form.paymentTerms"
                                     :items="['CASH', 'PDC', 'CHARGE']"
                                     variant="outlined"
-                                    
+                                    required
                                 ></v-select>
                             </v-col>
                             <v-col md="2" cols="12">
@@ -240,6 +240,7 @@ function submit(){
                                     :items="['AIR', 'SEA', 'TRUCK', 'OTHERS']"
                                     @update:model-value="otherField"
                                     variant="outlined"
+                                    required
                                 ></v-select>
                             </v-col>
                             <v-col md="4" cols="12">
@@ -257,7 +258,7 @@ function submit(){
                                     label="PO No."
                                     v-model="form.po_no"
                                     variant="outlined"
-                            
+                                    required
                                 ></v-text-field>
                             </v-col>
                             <v-col md="4" cols="12">
@@ -266,6 +267,7 @@ function submit(){
                                     label="Order Date"
                                     v-model="form.order_date"
                                     variant="outlined"
+                                    required
                                 ></v-date-input>
                             </v-col>
                             <v-col md="4" cols="12">
@@ -274,6 +276,7 @@ function submit(){
                                     label="Delivery Date"
                                     v-model="form.delivery_date"
                                     variant="outlined"
+                                    required
                                 ></v-date-input>
           
                             </v-col>
@@ -303,6 +306,7 @@ function submit(){
                                     @update:modelValue="onProductSelect(field)"
                                     no-data-text
                                     variant="outlined"
+                                    required
                                 ></v-autocomplete>
                             </v-col>   
                             <v-col cols="12" md="3" class="mx-2"> 
@@ -310,6 +314,7 @@ function submit(){
                                     v-model="field.description" 
                                     placeholder="Description"
                                     variant="outlined"
+                                    required
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="1" class="mx-2"> 
@@ -317,6 +322,7 @@ function submit(){
                                     v-model="field.uom" 
                                     placeholder="UOM"
                                     variant="outlined"
+                                    required
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="1" class="mx-2"> 
@@ -325,7 +331,7 @@ function submit(){
                                     v-model="field.quantity"
                                     type="number"
                                     variant="outlined"
-                                    
+                                    required
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="2" class="mx-2"> 
@@ -334,6 +340,7 @@ function submit(){
                                     v-model="field.price"
                                     type="number"
                                     variant="outlined"
+                                    required
                                 ></v-text-field>
                             </v-col>
                              <v-col cols="12" md="2" class="mx-3"> 
@@ -343,6 +350,7 @@ function submit(){
                                     type="number"
                                     readonly
                                     variant="outlined"
+                                    required
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="3" class="mx-2 mb-6">
